@@ -1,7 +1,0 @@
-{"version":3,
- "file":
- "/Users/erik/Documents/clojure/Gotclj/got-graph/out/got_graph/core.js",
- "sources":["core.cljs"],
- "lineCount":10,
- "mappings":";;;;;;AAECA,mCAEGC,UACDC,4BAAAD",
- "names":["foo", "x", "println"]}
