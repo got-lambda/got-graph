@@ -1,11 +1,12 @@
 (ns got-graph.core)
 
 (def canvas (js/document.getElementById "canvas"))
-(def ctx    (.getContext canvas "2d"))
+(def ctx (doto (.getContext canvas "2d")
+           (aset "font" "bold 12px sans-serif")))
 (def ^:constant font-size 12)
 
 (defn text-width [text]
-  (+ 45 (* (count text) font-size 0.45)))
+  (+ 40 (.-width (.measureText ctx text))))
 
 (defn draw-ball [x y text]
   (let [width (text-width text)
