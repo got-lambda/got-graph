@@ -14,7 +14,7 @@
     :builds [{:id "got-graph"
               :source-paths ["src"]
               :compiler {
-                :output-to "got-graph.js"
+                :output-to "got_graph.js"
                 :output-dir "out"
                 :optimizations :none
                 :source-map true}}]})
