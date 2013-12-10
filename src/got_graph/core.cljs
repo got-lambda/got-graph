@@ -1,4 +1,5 @@
-(ns got-graph.core)
+(ns got-graph.core
+  (:require [got-graph.transform :refer [graph->layers graph->connections ex1]]))
 
 (def canvas (js/document.getElementById "canvas"))
 (def ctx (doto (.getContext canvas "2d")
@@ -74,4 +75,5 @@
    "Hello world longer" ["node6"]
    "node4" ["node7" "node8"]})
 
-(draw-cords-data (analyse-rows example-data) example-mappings)
+(draw-cords-data (analyse-rows (graph->layers ex1)) (graph->connections ex1))
+

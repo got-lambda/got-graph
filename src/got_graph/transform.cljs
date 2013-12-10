@@ -5,16 +5,28 @@
                      {:data 'bar
                       :children [{:data 'baz} {:data 'baz2}]}]})
 
-(defn traverse [node depth]
+(defn traverse-layers [node depth]
   (let [data [depth (str (:data node))]]
     (if-let [children (:children node)]
-      (conj (mapcat #(traverse % (inc depth)) children) data)
+      (conj (mapcat #(traverse-layers % (inc depth)) children) data)
       [data])))
 
 (defn graph->layers [graph]
-  (->> (traverse graph 0)
+  (->> (traverse-layers graph 0)
        (group-by first)
        vals
        (map #(map second %))))
 
-(graph->layers ex1)
+(defn traverse-connections [node]
+  (let [data (str (:data node))
+        children (:children node)
+        result {data (map #(str (:data %)) children)}]
+    (if (seq children)
+      (conj (mapcat traverse-connections children) result)
+      [result])))
+
+(defn graph->connections [graph]
+  (->> (traverse-connections graph)
+       (apply merge)
+       (remove #(empty? (second %)))
+       (into {})))
